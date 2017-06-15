@@ -3,6 +3,11 @@
   become: yes
   become_method: su
   tasks:
+  - name: Verify build_number is set
+    assert:
+      that: 
+        - "build_number > 0"
+
   - name: Package Prerequisites
     apt:
       update_cache: yes
@@ -31,7 +36,7 @@
 
   - name: Run ERP test suite
     # daemon --name ensures only one runs at a time
-    command: daemon --name=erp_suite --errlog=/root/run_erp_suite.stderr.log --dbglog=/root/run_erp_suite.stdout.log -- /root/run_erp_suite.sh
+    command: daemon --name=erp_suite --errlog=/root/run_erp_suite.stderr.log --dbglog=/root/run_erp_suite.stdout.log -- /root/run_erp_suite.sh {{build_number}}
     environment:
       SQUAD_AUTH_TOKEN: "{{squad_auth_token}}"
 

@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/bin/sh
+
+if [ -z $1 ]; then
+    echo "Usage: $0 <build_number>"
+    exit 1
+fi
 
 report_url="https://staging-qa-reports.linaro.org"
 plans="plans/rpb_ee/rpb_ee_functional.yaml plans/rpb_ee/rpb_ee_performance.yaml plans/rpb_ee/rpb_ee_enterprise.yaml plans/rpb_ee/rpb_ee_stress.yaml"
@@ -8,18 +13,18 @@ td_path=${root_path}/test-definitions
 
 cd ${td_path}
 . ./automated/bin/setenv.sh
-datetime=$(date +%s)
+build_id=$1-$(dpkg-query -W -f '${package}-${version}\n' | grep linaro | md5sum | cut -c -8)
 
 for plan in ${plans}; do
     plan_short=$(basename -s .yaml ${plan})
-    output_path=${root_path}/${plan_short}-${datetime}
+    output_path=${root_path}/${build_id}-${plan_short}
     mkdir -p ${output_path}
     test-runner -o ${output_path} \
                 -p ${plan} \
                 > ${output_path}/test-runner-stdout.log \
                 2> ${output_path}/test-runner-stderr.log
     post-to-squad -r ${output_path}/result.json \
-                  -b ${datetime} \
+                  -b ${build_id} \
                   -a ${output_path}/result.csv \
                   -a ${output_path}/test-runner-stdout.log \
                   -a ${output_path}/test-runner-stderr.log \
