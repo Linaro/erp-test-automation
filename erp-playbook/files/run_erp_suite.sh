@@ -6,10 +6,15 @@ if [ -z $1 ]; then
 fi
 
 report_url="https://staging-qa-reports.linaro.org"
-plans="plans/rpb_ee/rpb_ee_functional.yaml plans/rpb_ee/rpb_ee_performance.yaml plans/rpb_ee/rpb_ee_enterprise.yaml plans/rpb_ee/rpb_ee_stress.yaml"
+plans="plans/rpb_ee/rpb_ee_functional.yaml plans/rpb_ee/rpb_ee_performance.yaml plans/rpb_ee/rpb_ee_enterprise.yaml"
 
 root_path=/root
 td_path=${root_path}/test-definitions
+
+# Gather environmental info for erp project and environment names
+vendor_name=$(slugify `cat /sys/devices/virtual/dmi/id/board_vendor`)
+board_name=$(slugify `cat /sys/devices/virtual/dmi/id/board_name`)
+os_name=$(slugify `grep ^ID= /etc/os-release | awk -F= '{print $2}'`)
 
 cd ${td_path}
 . ./automated/bin/setenv.sh
@@ -28,6 +33,9 @@ for plan in ${plans}; do
                   -a ${output_path}/result.csv \
                   -a ${output_path}/test-runner-stdout.log \
                   -a ${output_path}/test-runner-stderr.log \
-                  -u ${report_url} -t erp \
+                  -u ${report_url} \
+                  -p ${vendor_name} \
+                  -e ${os_name}-${board_name} \
+                  -t erp \
                   > ${output_path}/post-to-squad.log 2>&1
 done

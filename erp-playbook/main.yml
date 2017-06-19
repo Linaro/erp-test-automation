@@ -28,6 +28,10 @@
     pip:
       requirements: /root/test-definitions/automated/utils/requirements.txt
 
+  - name: Install python prerequisites
+    pip:
+      name: python-slugify
+
   - name: Copy test harness
     copy:
       src: run_erp_suite.sh
