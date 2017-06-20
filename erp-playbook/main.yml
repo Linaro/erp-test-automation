@@ -26,6 +26,8 @@
       - git
       - python-pip
       - daemon
+      - sysstat # for troubleshooting
+      - strace # for troubleshooting
 
   - name: Clone test-definitions repository
     git:

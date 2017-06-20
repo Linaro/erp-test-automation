@@ -34,8 +34,6 @@ for plan in ${plans}; do
                   -a ${output_path}/test-runner-stdout.log \
                   -a ${output_path}/test-runner-stderr.log \
                   -u ${report_url} \
-                  -p ${vendor_name} \
-                  -e ${os_name}-${board_name} \
-                  -t erp \
+                  -t erp-${vendor_name} \
                   > ${output_path}/post-to-squad.log 2>&1
 done
