@@ -19,16 +19,17 @@ TFTP_PATH=/var/lib/tftpboot/debian-staging/${VERSION}
 
 mkdir -p ${TFTP_PATH}
 if [ ! -f ${TFTP_PATH}/initrd.gz ]; then
-    curl -L -o ${TFTP_PATH}/initrd.gz http://builds.96boards.org/snapshots/reference-platform/components/debian-installer-staging/${VERSION}/debian-installer/arm64/initrd.gz
+    curl -f -L -o ${TFTP_PATH}/initrd.gz http://builds.96boards.org/snapshots/reference-platform/components/debian-installer-staging/${VERSION}/debian-installer/arm64/initrd.gz
 fi
 if [ ! -f ${TFTP_PATH}/linux ]; then
-    curl -L -o ${TFTP_PATH}/linux http://builds.96boards.org/snapshots/reference-platform/components/debian-installer-staging/${VERSION}/debian-installer/arm64/linux
+    curl -f -L -o ${TFTP_PATH}/linux http://builds.96boards.org/snapshots/reference-platform/components/debian-installer-staging/${VERSION}/debian-installer/arm64/linux
 fi
 
-cp /var/lib/tftpboot/grub.cfg /var/lib/tftpboot/.grub.cfg.$(date +%s)
+grep -q "Install Debian Jessie - RP Staging - Image $VERSION - Automated" /var/lib/tftpboot/grub.cfg || \
+cp /var/lib/tftpboot/grub.cfg /var/lib/tftpboot/.grub.cfg.$(date +%s) && \
 cat << EOF >> /var/lib/tftpboot/grub.cfg
 menuentry 'Install Debian Jessie - RP Staging - Image $VERSION - Automated' {
-    linux /debian-staging/$VERSION/linux auto=true interface=auto priority=critical noshell BOOT_DEBUG=1 DEBIAN_FRONTEND=text url=http://people.linaro.org/~dan.rue/erp-test-automation/releases/17.08/debian/preseed.cfg ---
+    linux /debian-staging/$VERSION/linux auto=true url=http://people.linaro.org/~dan.rue/erp-test-automation/releases/17.08/debian/preseed.cfg ---
     initrd /debian-staging/$VERSION/initrd.gz
 }
 
