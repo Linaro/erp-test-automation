@@ -5,7 +5,7 @@
   tasks:
   - name: Verify build_number is set
     assert:
-      that: 
+      that:
         - "build_number > 0"
 
   - name: Check for /root/test-definitions

@@ -6,7 +6,7 @@ if [ -z $1 ]; then
 fi
 
 report_url="https://staging-qa-reports.linaro.org"
-plans="plans/rpb_ee/rpb_ee_performance.yaml plans/rpb_ee/rpb_ee_enterprise.yaml plans/rpb_ee/rpb_ee_functional.yaml plans/rpb_ee/rpb_ee_ltp.yaml"
+plans="plans/rpb_ee/rpb_ee_functional.yaml plans/rpb_ee/rpb_ee_enterprise.yaml plans/rpb_ee/rpb_ee_performance.yaml plans/rpb_ee/rpb_ee_ltp.yaml"
 
 root_path=/root
 td_path=${root_path}/test-definitions
