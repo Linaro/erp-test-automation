@@ -33,7 +33,7 @@
     git:
       repo: 'https://git.linaro.org/qa/test-definitions.git'
       dest: /root/test-definitions
-      version: master
+      version: erp-17.08
 
   - name: Install python prerequisites
     pip:
