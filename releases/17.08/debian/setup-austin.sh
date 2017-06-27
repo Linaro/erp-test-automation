@@ -29,7 +29,7 @@ grep -q "Install Debian Jessie - RP Staging - Image $VERSION - Automated" /var/l
 cp /var/lib/tftpboot/grub.cfg /var/lib/tftpboot/.grub.cfg.$(date +%s) && \
 cat << EOF >> /var/lib/tftpboot/grub.cfg
 menuentry 'Install Debian Jessie - RP Staging - Image $VERSION - Automated' {
-    linux /debian-staging/$VERSION/linux auto=true url=http://people.linaro.org/~dan.rue/erp-test-automation/releases/17.08/debian/preseed.cfg ---
+    linux /debian-staging/$VERSION/linux auto=true interface=auto priority=critical noshell BOOT_DEBUG=1 DEBIAN_FRONTEND=text url=http://people.linaro.org/~dan.rue/erp-test-automation/releases/17.08/debian/preseed.cfg ---
     initrd /debian-staging/$VERSION/initrd.gz
 }
 
