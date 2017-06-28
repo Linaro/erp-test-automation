@@ -5,7 +5,7 @@ if [ -z $1 ]; then
     exit 1
 fi
 
-report_url="https://staging-qa-reports.linaro.org"
+report_url="{{squad[squad_environment]['url']}}"
 plans="plans/rpb_ee/rpb_ee_functional.yaml plans/rpb_ee/rpb_ee_enterprise.yaml plans/rpb_ee/rpb_ee_performance.yaml plans/rpb_ee/rpb_ee_ltp.yaml"
 
 root_path=/root
@@ -35,5 +35,6 @@ for plan in ${plans}; do
                   -a ${output_path}/test-runner-stderr.log \
                   -u ${report_url} \
                   -t erp-${vendor_name} \
+                  -p staging-debian \
                   > ${output_path}/post-to-squad.log 2>&1
 done

@@ -2,6 +2,9 @@
 - hosts: erp
   become: yes
   become_method: su
+  vars:
+    squad_environment: production
+
   tasks:
   - name: Verify build_number is set
     assert:
@@ -44,7 +47,7 @@
       name: python-slugify
 
   - name: Copy test harness
-    copy:
+    template:
       src: run_erp_suite.sh
       dest: /root/run_erp_suite.sh
       mode: 0755
@@ -53,5 +56,6 @@
     # daemon --name ensures only one runs at a time
     command: daemon --name=erp_suite --errlog=/root/run_erp_suite.stderr.log --dbglog=/root/run_erp_suite.stdout.log -- /root/run_erp_suite.sh {{build_number}}
     environment:
-      SQUAD_AUTH_TOKEN: "{{squad_auth_token}}"
+      SQUAD_AUTH_TOKEN: "{{squad[squad_environment]['auth_token']}}"
+
 
