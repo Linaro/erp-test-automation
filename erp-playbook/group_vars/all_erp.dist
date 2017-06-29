@@ -1,0 +1,14 @@
+# Default username and password for each host in ../hosts
+# If a host needs a different settings, put it in ../hosts
+# These should match the preseed file used during host provisioning.
+ansible_user: linaro
+ansible_ssh_pass: linaro
+ansible_become_pass: root
+ansible_become: yes
+ansible_become_method: su
+
+squad_auth_tokens:
+  production: "MY_SECRET_TOKEN"
+  staging: "MY_SECRET_TOKEN"
+
+ansible_ssh_common_args: '-o UserKnownHostsFile=/dev/null'

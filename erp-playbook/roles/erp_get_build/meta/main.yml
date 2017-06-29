@@ -1,0 +1,12 @@
+galaxy_info:
+  author: Dan Rue <dan.rue@linaro.org>
+  description: Download an ERP release
+  company: Linaro
+
+  license: BSD
+
+  min_ansible_version: 2.2
+
+  galaxy_tags: []
+
+dependencies: []

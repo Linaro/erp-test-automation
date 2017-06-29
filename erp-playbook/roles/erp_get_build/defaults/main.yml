@@ -1,0 +1,14 @@
+---
+
+# Which debian installer to use. Defaults to staging, but may also be
+# 'release'.
+erp_debian_installer_environment: staging
+
+erp_debian_installer_jenkins_urls:
+  staging: "https://ci.linaro.org/view/reference-platform/job/96boards-reference-debian-installer-staging/api/json"
+  release: "https://ci.linaro.org/view/reference-platform/job/96boards-reference-debian-installer/api/json"
+
+erp_debian_installer_download_urls:
+  staging: "http://builds.96boards.org/snapshots/reference-platform/components/debian-installer-staging/"
+  release: "http://builds.96boards.org/snapshots/reference-platform/components/debian-installer/"
+

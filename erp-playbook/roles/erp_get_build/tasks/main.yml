@@ -1,0 +1,22 @@
+---
+- name: Get latest build number from Jenkins
+  uri:
+    url: "{{erp_debian_installer_jenkins_urls[erp_debian_installer_environment]}}"
+  register: jenkins_build_info
+- set_fact:
+    erp_latest_build: "{{jenkins_build_info['json']['lastCompletedBuild']['number']}}"
+
+- debug:
+    msg: "Latest debian installer {{erp_debian_installer_environment}} build is {{erp_latest_build}}"
+
+- name: Create local builds directory
+  file:
+    path: "./builds/debian-{{erp_debian_installer_environment}}/{{erp_latest_build}}"
+    state: directory
+- name: Download build locally
+  get_url:
+    url: "{{erp_debian_installer_download_urls[erp_debian_installer_environment]}}/{{erp_latest_build}}/debian-installer/arm64/{{item}}"
+    dest: "./builds/debian-{{erp_debian_installer_environment}}/{{erp_latest_build}}/{{item}}"
+  with_items:
+    - "initrd.gz"
+    - "linux"

@@ -1,0 +1,54 @@
+---
+- name: Verify variables are set
+  assert:
+    that: "{{ item }} is defined"
+    msg: Run erp_get_build role first
+  with_items:
+    - erp_debian_installer_environment
+    - erp_latest_build
+
+- name: Create destination path
+  file:
+    path: "/var/lib/tftpboot/debian-{{erp_debian_installer_environment}}/{{erp_latest_build}}"
+    state: directory
+- name: Copy over new build
+  copy:
+    src: "./builds/debian-{{erp_debian_installer_environment}}/{{erp_latest_build}}/{{item}}"
+    dest: "/var/lib/tftpboot/debian-staging/{{erp_latest_build}}/{{item}}"
+  with_items:
+    - "initrd.gz"
+    - "linux"
+- name: Update default for host /var/lib/tftpboot/grub.cfg
+  blockinfile:
+    backup: yes
+    path: /var/lib/tftpboot/grub.cfg
+    marker: "# {mark} Default for {{ansible_default_ipv4['macaddress']}}"
+    block: |
+      if [ "${net_default_mac}" = "{{ansible_default_ipv4['macaddress']}}" ]; then
+          set timeout=5
+          set default='Install Debian Jessie - RP {{erp_debian_installer_environment}} - Image {{erp_latest_build}} - Automated'
+      fi
+
+- name: Update menuentry /var/lib/tftpboot/grub.cfg
+  blockinfile:
+    path: /var/lib/tftpboot/grub.cfg
+    insertafter: EOF
+    marker: "# {mark} debian-{{erp_debian_installer_environment}} {{erp_latest_build}}"
+    block: |
+      menuentry 'Install Debian Jessie - RP {{erp_debian_installer_environment}} - Image {{erp_latest_build}} - Automated' {
+          linux /debian-{{erp_debian_installer_environment}}/{{erp_latest_build}}/linux module_blacklist=mlx5_core auto=true interface=auto priority=critical noshell BOOT_DEBUG=1 DEBIAN_FRONTEND=text url=http://people.linaro.org/~dan.rue/erp-test-automation/releases/17.08/debian/preseed.cfg ---
+          initrd /debian-{{erp_debian_installer_environment}}/{{erp_latest_build}}/initrd.gz
+      }
+
+# XXX: Replace with automation script
+- name: Connect to console
+  pause:
+    prompt: "In a separate window, run the following to attach to the amberwing: 'ssh -t aus-colo.linaro.org ipmitool -I lanplus -A PASSWORD -U admin -P Password1 -H {{inventory_hostname}}-bmc sol activate' and then press <enter> to reboot"
+
+- name: amberwing - reboot
+  command: ipmitool -I lanplus -A PASSWORD -U admin -P Password1 -H {{inventory_hostname}}-bmc chassis power cycle
+
+# TODO: Replace with automation script
+- name: Reboot machines and install OS
+  pause:
+    prompt: "Install new OS. <enter> once complete"

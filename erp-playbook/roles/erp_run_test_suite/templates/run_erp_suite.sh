@@ -5,7 +5,7 @@ if [ -z $1 ]; then
     exit 1
 fi
 
-report_url="{{squad[squad_environment]['url']}}"
+report_url="{{erp_squad_url[erp_squad_environment]}}"
 plans="plans/rpb_ee/rpb_ee_functional.yaml plans/rpb_ee/rpb_ee_enterprise.yaml plans/rpb_ee/rpb_ee_performance.yaml plans/rpb_ee/rpb_ee_ltp.yaml"
 
 root_path=/root
