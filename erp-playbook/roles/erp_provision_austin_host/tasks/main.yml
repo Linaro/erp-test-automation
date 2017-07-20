@@ -22,9 +22,9 @@
   blockinfile:
     backup: yes
     path: /var/lib/tftpboot/grub.cfg
-    marker: "# {mark} Default for {{ansible_default_ipv4['macaddress']}}"
+    marker: "# {mark} Default for {{macaddress}}"
     block: |
-      if [ "${net_default_mac}" = "{{ansible_default_ipv4['macaddress']}}" ]; then
+      if [ "${net_default_mac}" = "{{macaddress}}" ]; then
           set timeout=5
           set default='Install Debian Jessie - RP {{erp_debian_installer_environment}} - Image {{erp_latest_build}} - Automated'
       fi

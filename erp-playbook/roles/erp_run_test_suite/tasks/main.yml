@@ -7,6 +7,9 @@
     - erp_squad_environment
     - erp_squad_auth_token
 
+- name: Gather Facts
+  setup:
+
 - name: Check for /root/test-definitions
   stat:
     path: /root/test-definitions

@@ -1,4 +1,6 @@
-- hosts: all_erp
+- name: ERP Testing
+  hosts: all_erp
+  gather_facts: false
   vars:
     squad_environment: production
     debian_installer_environment: staging
@@ -6,15 +8,27 @@
   pre_tasks:
     - set_fact:
         erp_squad_auth_token: "{{squad_auth_tokens[squad_environment]}}"
+      tags:
+        - always
 
   roles:
     - role: erp_get_build
       delegate_to: localhost
       run_once: true
+      tags:
+        - always
     - role: erp_provision_cambridge_host
       delegate_to: localhost
       when: "'cambridge_erp' in group_names"
+      tags:
+        - provision
     - role: erp_provision_austin_host
       delegate_to: qa-pxe
+      become: true
+      become_method: sudo
       when: "'austin_erp' in group_names"
+      tags:
+        - provision
     - role: erp_run_test_suite
+      tags:
+        - run_test
