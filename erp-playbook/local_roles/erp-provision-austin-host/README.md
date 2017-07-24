@@ -6,7 +6,9 @@ Provision a host in the Austin lab.
 Requirements
 ------------
 
-This role expects erp_get_build to run first.
+This role expects
+[Linaro:erp-get-build](https://galaxy.ansible.com/Linaro/erp-get-build/) to run
+first.
 
 Role Variables
 --------------
@@ -16,7 +18,7 @@ None
 Dependencies
 ------------
 
-erp_get_build role.
+[Linaro:erp-get-build](https://galaxy.ansible.com/Linaro/erp-get-build/) role.
 
 License
 -------

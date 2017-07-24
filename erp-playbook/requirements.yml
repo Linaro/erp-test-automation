@@ -1,0 +1,4 @@
+- src: Linaro.erp-get-build
+  version: master
+- src: Linaro.erp-run-test-suite
+  version: master

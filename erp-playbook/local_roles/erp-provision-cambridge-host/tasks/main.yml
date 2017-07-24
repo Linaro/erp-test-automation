@@ -4,17 +4,17 @@
     msg: Run erp_get_build role first
   with_items:
     - erp_debian_installer_environment
-    - erp_latest_build
+    - erp_build_number
 
 # TODO: Replace with API call, once supported.
 - name: Upload build to Cambridge Lab
   pause:
-    prompt: "Upload ./builds/debian-{{erp_debian_installer_environment}}/{{erp_latest_build}}/ files to http://172.27.80.1:5000/admin/images with description 'debian-installer {{erp_debian_installer_environment}} Build {{erp_latest_build}}'. Press <enter> key when complete"
+    prompt: "Upload ./builds/debian-{{erp_debian_installer_environment}}/{{erp_build_number}}/ files to http://172.27.80.1:5000/admin/images with description 'debian-installer {{erp_debian_installer_environment}} Build {{erp_build_number}}'. Press <enter> key when complete"
 
 # TODO: Replace with API call, once supported.
 - name: Edit Machines
   pause:
-    prompt: "In Mr. Provisioner, modify each machine in your host group to {{erp_latest_build}}. <enter> once complete"
+    prompt: "In Mr. Provisioner, modify each machine in your host group to {{erp_build_number}}. <enter> once complete"
 
 # TODO: Replace with API call, once supported.
 - name: Reboot machines and install OS

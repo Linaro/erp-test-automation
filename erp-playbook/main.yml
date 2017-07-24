@@ -12,23 +12,23 @@
         - always
 
   roles:
-    - role: erp_get_build
+    - role: Linaro.erp-get-build
       delegate_to: localhost
       run_once: true
       tags:
         - always
-    - role: erp_provision_cambridge_host
+    - role: erp-provision-cambridge-host
       delegate_to: localhost
       when: "'cambridge_erp' in group_names"
       tags:
         - provision
-    - role: erp_provision_austin_host
+    - role: erp-provision-austin-host
       delegate_to: qa-pxe
       become: true
       become_method: sudo
       when: "'austin_erp' in group_names"
       tags:
         - provision
-    - role: erp_run_test_suite
+    - role: Linaro.erp-run-test-suite
       tags:
         - run_test
