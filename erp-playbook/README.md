@@ -53,3 +53,18 @@ To run against a given host or host group, run `ansible-playbook -l
 <hostname|hostgroup> main.yml`. If -l (limit) is not used, ansible will attempt
 to run against every host defined in `hosts`.
 
+## Examples
+
+Provision hosts in the 'erp-drue' hostgroup:
+
+    make run-drue
+
+Run tests against already-provisioned hosts in the 'erp-drue' hostgroup, but
+set build number explicitly:
+
+    make run-drue BUILD_NUM=450
+
+Provision and run against hosts using the stable build number 321:
+
+    make provision-drue BUILD_ENV=staging BUILD_NUM=321
+    make run-drue BUILD_ENV=staging BUILD_NUM=321

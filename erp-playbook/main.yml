@@ -3,7 +3,7 @@
   gather_facts: false
   vars:
     squad_environment: production
-    debian_installer_environment: staging
+    erp_debian_installer_environment: stable
 
   pre_tasks:
     - set_fact:
