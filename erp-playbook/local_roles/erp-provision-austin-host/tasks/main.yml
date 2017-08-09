@@ -14,7 +14,7 @@
 - name: Copy over new build
   copy:
     src: "./builds/debian-{{erp_debian_installer_environment}}/{{erp_build_number}}/{{item}}"
-    dest: "/var/lib/tftpboot/debian-staging/{{erp_build_number}}/{{item}}"
+    dest: "/var/lib/tftpboot/debian-{{erp_debian_installer_environment}}/{{erp_build_number}}/{{item}}"
   with_items:
     - "initrd.gz"
     - "linux"
