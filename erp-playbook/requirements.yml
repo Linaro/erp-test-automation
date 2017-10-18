@@ -2,3 +2,5 @@
   version: master
 - src: Linaro.erp-run-test-suite
   version: master
+- src: Linaro.mr-provisioner
+  version: master

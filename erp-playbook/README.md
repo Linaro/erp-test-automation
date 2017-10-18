@@ -16,33 +16,33 @@ host, it will start them.
 
 ### Find ERP build
 
-The `erp_get_build` role will ask jenkins for the latest build and then
-download the build locally. This role is required to be run before the
-subsequent roles.
+The `Linaro.erp-get-build` role will download the latest (or specified) build
+locally. This role is required to be run before the subsequent roles.
 
 ### Provision Host
 
 Depending on which lab a host is in (defined by their host group in `hosts`), a
 lab-specific role will be run to provision a host.
 
-The `erp_provision_austin_host` is used to provision hosts in the US Austin
-lab.
+The local role `erp-provision-austin-host` is used to provision hosts in the US
+Austin lab.
 
-The `erp_provision_cambridge_host` is used to provision hosts in the UK
+The `Linaro.mr-provisioner` role is used to provision hosts in the UK
 Cambridge lab.
 
 ### Run ERP Test Suite
 
-The `erp_run_test_suite` will ssh into the given host, install test-definitions
-prerequisites, clone test-definitions, run each test plan that is used for ERP
-testing, and post the results to https://qa-reports.linaro.org/ using the given
-latest build number (discovered in `erp_get_build`).
+The `Linaro.erp-run-test-suite` role will ssh into the given host, install
+test-definitions prerequisites, clone test-definitions, run each test plan that
+is used for ERP testing, and post the results to https://qa-reports.linaro.org/
+using the given latest build number (discovered or specified in
+`Linaro.erp-get-build`).
 
 ## Usage
 
 See the `Makefile` for example usecases.
 
-Note that 'hosts' and 'group_vars/all' files are encrypted using ansible vault.
+Note that 'hosts' and 'group_vars/' files are encrypted using ansible vault.
 To use, the vault password will have to be available in ~/.vault_pass_erp.txt.
 Once set, use `ansible-vault edit` to view and modify.
 

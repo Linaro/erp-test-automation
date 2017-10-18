@@ -18,6 +18,7 @@
   with_items:
     - "initrd.gz"
     - "linux"
+
 - name: Update default for host /var/lib/tftpboot/grub.cfg
   blockinfile:
     backup: yes
@@ -40,15 +41,10 @@
           initrd /debian-{{erp_debian_installer_environment}}/{{erp_build_number}}/initrd.gz
       }
 
-# XXX: Replace with automation script
-- name: Connect to console
-  pause:
-    prompt: "In a separate window, run the following to attach to the amberwing: 'ssh -t aus-colo.linaro.org ipmitool -I lanplus -A PASSWORD -U admin -P Password1 -H {{inventory_hostname}}-bmc sol activate' and then press <enter> to reboot"
+- name: amberwing - Set nextboot to pxe via ipmi raw mode
+  command: "ipmitool -I lanplus -A PASSWORD -U admin -P Password1 -H {{inventory_hostname}}-bmc raw 0x0 0x8 0x5 0xA0 0x4 0x0 0x0 0x3"
 
 - name: amberwing - reboot
   command: ipmitool -I lanplus -A PASSWORD -U admin -P Password1 -H {{inventory_hostname}}-bmc chassis power cycle
 
-# TODO: Replace with automation script
-- name: Reboot machines and install OS
-  pause:
-    prompt: "Install new OS. <enter> once complete"
+# TODO: Wait for completion
