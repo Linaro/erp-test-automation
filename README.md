@@ -7,7 +7,7 @@ purposes of ERP testing.
 Scope
 -----
 
-- PXE-related configuration. 
+- PXE-related configuration.
 - grub.cfg
 - interfaces to test-definitions/test-runner
 
