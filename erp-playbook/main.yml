@@ -17,15 +17,15 @@
       run_once: true
       tags:
         - always
-    - role: Linaro.mr-provisioner
-      when: "'cambridge_erp' in group_names"
-      tags:
-        - provision
     - role: erp-provision-austin-host
       delegate_to: qa-pxe
       become: true
       become_method: sudo
       when: "'austin_erp' in group_names"
+      tags:
+        - provision
+    - role: Linaro.mr-provisioner
+      when: "'cambridge_erp' in group_names"
       tags:
         - provision
     - role: Linaro.erp-run-test-suite

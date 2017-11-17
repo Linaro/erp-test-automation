@@ -1,6 +1,13 @@
 BUILD_NUM = # retrieve latest build by default
 BUILD_ENV = staging # alternately, use stable
 
+provision-and-run-drue: roles
+ifeq ($(strip $(BUILD_NUM)),)
+	ansible-playbook -K -l erp-drue -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
+else
+	ansible-playbook -K -l erp-drue -e erp_build_number=$(BUILD_NUM) -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
+endif
+
 provision-drue: roles
 ifeq ($(strip $(BUILD_NUM)),)
 	ansible-playbook -K -t provision -l erp-drue -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
