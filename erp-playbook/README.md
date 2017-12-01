@@ -21,14 +21,8 @@ locally. This role is required to be run before the subsequent roles.
 
 ### Provision Host
 
-Depending on which lab a host is in (defined by their host group in `hosts`), a
-lab-specific role will be run to provision a host.
-
-The local role `erp-provision-austin-host` is used to provision hosts in the US
-Austin lab.
-
 The `Linaro.mr-provisioner` role is used to provision hosts in the UK
-Cambridge lab.
+Cambridge lab, or any lab that uses mr-provisioner..
 
 ### Run ERP Test Suite
 
@@ -55,13 +49,13 @@ to run against every host defined in `hosts`.
 
 ## Examples
 
-Provision hosts in the 'erp-drue' hostgroup:
+Provision and run tests on hosts in the 'erp-drue' hostgroup:
 
-    make run-drue
+    make provision-and-run-drue
 
-Run tests against already-provisioned hosts in the 'erp-drue' hostgroup, but
-set build number explicitly:
+Provision hosts and run tests separately. Set build number explicitly:
 
+    make provision-drue BUILD_NUM=450
     make run-drue BUILD_NUM=450
 
 Provision and run against hosts using the stable build number 321:
