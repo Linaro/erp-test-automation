@@ -18,7 +18,6 @@
       tags:
         - always
     - role: Linaro.mr-provisioner
-      when: "'cambridge_erp' in group_names"
       tags:
         - provision
     - role: Linaro.erp-run-test-suite
