@@ -24,23 +24,23 @@ endif
 
 provision-and-run-chase: roles
 ifeq ($(strip $(BUILD_NUM)),)
-	ansible-playbook -l erp-chase -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
+	ansible-playbook -l chase_erp -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
 else
-	ansible-playbook -l erp-chase -e erp_build_number=$(BUILD_NUM) -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
+	ansible-playbook -l chase_erp -e erp_build_number=$(BUILD_NUM) -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
 endif
 
 provision-chase: roles
 ifeq ($(strip $(BUILD_NUM)),)
-	ansible-playbook -t provision -l erp-chase -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
+	ansible-playbook -t provision -l chase_erp -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
 else
-	ansible-playbook -t provision -l erp-chase -e erp_build_number=$(BUILD_NUM) -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
+	ansible-playbook -t provision -l chase_erp -e erp_build_number=$(BUILD_NUM) -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
 endif
 
 run-chase: roles
 ifeq ($(strip $(BUILD_NUM)),)
-	ansible-playbook -t run_test -l erp-chase -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
+	ansible-playbook -t run_test -l chase_erp -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
 else
-	ansible-playbook -t run_test -l erp-chase -e "{erp_build_number: $(BUILD_NUM)}" -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
+	ansible-playbook -t run_test -l chase_erp -e "{erp_build_number: $(BUILD_NUM)}" -e erp_debian_installer_environment=$(BUILD_ENV) main.yml
 endif
 
 roles:
