@@ -1,0 +1,18 @@
+- name: Wait for tests to finish
+  hosts: all_erp
+  gather_facts: false
+
+  tasks:
+  - name: Wait for SUT poweroff
+    delegate_to: localhost
+    mr_provisioner_power:
+      machine_name: "{{ inventory_hostname }}"
+      url: "{{ mr_provisioner_url }}"
+      token: "{{ mr_provisioner_auth_token }}"
+      wait_for_power: off
+      timeout: 21600
+      sleep: 600
+      # Force power off when timeout reached.
+      force_power: true
+    register: result
+  - debug: var=result
