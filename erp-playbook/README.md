@@ -49,16 +49,16 @@ to run against every host defined in `hosts`.
 
 ## Examples
 
-Provision and run tests on hosts in the 'erp-drue' hostgroup:
+Provision and run tests on hosts in the 'cb-g0' hostgroup:
 
-    make provision-and-run-drue
+    make provision-and-run-cb-g0
 
 Provision hosts and run tests separately. Set build number explicitly:
 
-    make provision-drue BUILD_NUM=450
-    make run-drue BUILD_NUM=450
+    make provision-cb-g0 BUILD_NUM=450
+    make run-cb-g0 BUILD_NUM=450
 
 Provision and run against hosts using the stable build number 321:
 
-    make provision-drue BUILD_ENV=staging BUILD_NUM=321
-    make run-drue BUILD_ENV=staging BUILD_NUM=321
+    make provision-cb-g0 BUILD_ENV=staging BUILD_NUM=321
+    make run-cb-g0 BUILD_ENV=staging BUILD_NUM=321
