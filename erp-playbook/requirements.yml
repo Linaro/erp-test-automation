@@ -1,5 +1,5 @@
 - src: Linaro.erp-get-build
-  version: 1.3.0
+  version: 1.4.0
 - src: Linaro.erp-run-test-suite
   version: 1.5.0
 - src: Linaro.mr-provisioner
