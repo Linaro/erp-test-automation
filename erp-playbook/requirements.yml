@@ -3,4 +3,4 @@
 - src: Linaro.erp-run-test-suite
   version: 1.6.0
 - src: Linaro.mr-provisioner
-  version: 1.0.3
+  version: 1.0.4
