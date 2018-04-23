@@ -6,12 +6,12 @@ localhost ansible_connection=local
 
 [cambridge_erp]
 # Cambridge Lab
-cb-r1-crb1s-02 ansible_host=10.101.2.100
-cb-r2-d03-04 ansible_host=10.101.2.111
-cb-r2-d05-01 ansible_host=10.101.2.107
-cb-r2-d05-03 ansible_host=10.101.2.22
-cb-r1-m1-c33n1 ansible_host=10.101.3.88
-cb-r1-m1-c34n1 ansible_host=10.101.3.89
+cb-r1-crb1s-02 ansible_host=192.168.0.100
+cb-r2-d03-04 ansible_host=192.168.0.101
+cb-r2-d05-01 ansible_host=192.168.0.102
+cb-r2-d05-03 ansible_host=192.168.0.103
+cb-r1-m1-c33n1 ansible_host=192.168.0.104
+cb-r1-m1-c34n1 ansible_host=192.168.0.105
 
 [open_estuary_erp]
 # Open Estuary Lab
