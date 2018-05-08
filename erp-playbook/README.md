@@ -47,18 +47,25 @@ To run against a given host or host group, run `ansible-playbook -l
 <hostname|hostgroup> main.yml`. If -l (limit) is not used, ansible will attempt
 to run against every host defined in `hosts`.
 
+Debian and CentOS installers are known supported. You may add 'vars/distro.yml' and
+set 'erp_installer_disro' variable to support other distros.
+
 ## Examples
 
-Provision and run tests on hosts in the 'cb-g0' hostgroup:
+Provision debain and run tests on hosts in the 'cb-g0' hostgroup:
 
     make provision-and-run-cb-g0
 
-Provision hosts and run tests separately. Set build number explicitly:
+Provision debian hosts and run tests separately. Set build number explicitly:
 
     make provision-cb-g0 BUILD_NUM=450
     make run-cb-g0 BUILD_NUM=450
 
-Provision and run against hosts using the stable build number 321:
+Provision debian and run against hosts using the stable build number 321:
 
     make provision-cb-g0 BUILD_ENV=staging BUILD_NUM=321
     make run-cb-g0 BUILD_ENV=staging BUILD_NUM=321
+
+Provision centos and run tests on hosts in the 'cb-g0' hostgroup:
+
+    make provision-and-run-cb-g0 BUILD_DISTRO=centos
