@@ -1,0 +1,24 @@
+---
+erp_installer_distro: "centos"
+
+# Used to discover available builds and set erp_build_number, when it's not
+# explicitly set
+erp_installer_download_urls_api:
+  staging: "http://snapshots.linaro.org/api/ls/96boards/reference-platform/components/centos-installer-staging/"
+  stable: "http://snapshots.linaro.org/api/ls/96boards/reference-platform/components/centos-installer/"
+
+# Used to download builds
+erp_installer_download_urls:
+  staging: "http://snapshots.linaro.org/96boards/reference-platform/components/centos-installer-staging/"
+  stable: "http://snapshots.linaro.org/96boards/reference-platform/components/centos-installer/"
+
+# Used to download build images
+erp_image_remote_paths:
+  kernel: "/images/pxeboot/vmlinuz"
+  initrd: "/images/pxeboot/initrd.img"
+
+# Used to provision host
+mr_provisioner_kernel_options: "text ip=dhcp inst.stage2={{erp_installer_download_urls[erp_installer_environment]}}/{{erp_build_number}}/ inst.repo=http://mirror.centos.org/altarch/7/os/aarch64/ inst.ks=file:/ks.cfg"
+mr_provisioner_preseed_name: "centos7-mini-install"
+mr_provisioner_preseed_type: "kickstart"
+mr_provisioner_preseed_path: "./preseeds/centos7-mini-install"

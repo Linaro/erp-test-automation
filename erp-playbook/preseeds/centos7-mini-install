@@ -1,0 +1,48 @@
+# Required Kernel options to install ERP CentOS7 build: 
+# ip=dhcp text inst.stage2=http://snapshots.linaro.org/96boards/reference-platform/components/centos-installer-staging/${build-id}/ inst.repo=http://mirror.centos.org/altarch/7/os/aarch64/ inst.ks=file:/ks.cfg
+
+# Use network installation
+url --url="http://mirror.centos.org/altarch/7/os/aarch64/"
+repo --name="ERP-RPM:staging" --baseurl=http://obs.linaro.org/ERP-RPM:/staging/staging/
+# Use text mode install
+text
+# Do not configure the X Window System
+skipx
+
+# Keyboard layouts
+keyboard --vckeymap=us --xlayouts=''
+# System language
+lang en_US.UTF-8
+# System timezone
+timezone Europe/London
+# Root password
+rootpw --iscrypted $6$qCllvKuC5tecQ97f$hbqPmxXZ66USDUA9EaafBMdSbM8p2Q/.AVY/M3k3sYNM7wveTRx3YNVoPyk9Vg5MFHE1FPU7V94kfmeJf3hMM.
+# Creat user linaro
+user --groups=wheel --name=linaro --password=$6$c5OHJqnzARjOuXBr$/V1trlZdj1PG8rZLW7TCAjUl2kP3aCqyJC.duUFXPdzNgFiphkBn6Cx24z7YoYwOWoRSdG/YoJQln1zAadAPX/ --iscrypted --gecos="linaro"
+
+# Network information
+network  --bootproto=dhcp
+network  --hostname=localhost.localdomain
+
+# System services
+services --enabled="chronyd"
+
+# Install to sda.
+bootloader --append=" crashkernel=auto" --location=mbr --boot-drive=sda
+ignoredisk --only-use=sda
+autopart --type=plain
+clearpart --all --initlabel --drives=sda
+
+# Reboot after installation
+reboot
+
+%packages
+@core
+chrony
+kexec-tools
+
+%end
+
+%addon com_redhat_kdump --enable --reserve-mb='auto'
+
+%end
