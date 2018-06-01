@@ -1,3 +1,4 @@
 *.retry
 builds/
 roles/
+.venv
