@@ -1,0 +1,2 @@
+mr_provisioner_arch: 'arm64'
+mr_provisioner_subarch: 'grub-efi-upstream-2.02'
