@@ -18,7 +18,7 @@ erp_image_remote_paths:
   initrd: "debian-installer/arm64/initrd.gz"
 
 # Used to provision host
-mr_provisioner_kernel_options: "DEBIAN_FRONTEND=text"
+mr_provisioner_kernel_options: "DEBIAN_FRONTEND=text {{ host_kernel_opts | default('') }}"
 mr_provisioner_preseed_name: "debian-mini-install"
 mr_provisioner_preseed_type: "preseed"
 mr_provisioner_preseed_path: "./preseeds/debian-mini-install"
