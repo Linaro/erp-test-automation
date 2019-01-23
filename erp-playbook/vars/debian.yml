@@ -4,13 +4,13 @@ erp_installer_distro: debian
 # Used to discover available builds and set erp_build_number, when it's not
 # explicitly set
 erp_installer_download_urls_api:
-  staging: "http://snapshots.linaro.org/api/ls/96boards/reference-platform/components/debian-installer-staging/"
-  stable: "http://snapshots.linaro.org/api/ls/96boards/reference-platform/components/debian-installer/"
+  staging: "http://snapshots.linaro.org/api/ls/reference-platform/components/debian-installer-staging/"
+  stable: "http://snapshots.linaro.org/api/ls/reference-platform/components/debian-installer/"
 
 # Used to download builds
 erp_installer_download_urls:
-  staging: "http://snapshots.linaro.org/96boards/reference-platform/components/debian-installer-staging/"
-  stable: "http://snapshots.linaro.org/96boards/reference-platform/components/debian-installer/"
+  staging: "http://snapshots.linaro.org/reference-platform/components/debian-installer-staging/"
+  stable: "http://snapshots.linaro.org/reference-platform/components/debian-installer/"
 
 # Used to download build images
 erp_image_remote_paths:
